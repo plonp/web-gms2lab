@@ -17,7 +17,7 @@ export default function App() {
       const el = document.activeElement, input = document.getElementById('search-input')
       if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(el?.tagName) && !el?.isContentEditable) {
         e.preventDefault()
-        if (location.pathname !== '/') navigate('/')
+        if (location.pathname !== '/' && location.pathname !== '/blogs') navigate('/')
         setTimeout(() => input?.select(), 0)
       } else if (e.key === 'Escape' && el === input) input?.blur()
     }

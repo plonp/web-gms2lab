@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useCopy } from '../hooks/useCopy'
+import { useFavorites } from '../hooks/useFavorites'
 
 const BLOG_POSTS = Object.entries(import.meta.glob('../blogs/*.js', { eager: true })).map(([path, mod]) => {
   const data = mod.default || mod, id = path.split('/').pop().replace(/\.[^/.]+$/, '')
@@ -9,6 +10,7 @@ const BLOG_POSTS = Object.entries(import.meta.glob('../blogs/*.js', { eager: tru
 export default function BlogDetailPage() {
   const { slug } = useParams()
   const [copiedId, copy] = useCopy()
+  const { toggleFavorite, isFavorite } = useFavorites()
 
   const currentIndex = BLOG_POSTS.findIndex((p) => p.slug === slug)
   const post = BLOG_POSTS[currentIndex]
@@ -33,12 +35,15 @@ export default function BlogDetailPage() {
       </div>
 
       <header className="border-b border-gm-border pb-8 mb-8">
-        <div className="flex flex-wrap items-center gap-3 text-xs mb-3">
-          <span className={`font-semibold ${post.categoryColor || 'text-gm-orange'}`}>{post.category}</span>
-          <span className="text-gm-muted">&bull;</span>
-          <span className="text-gm-muted font-mono">{post.readTime}</span>
-          <span className="text-gm-muted">&bull;</span>
-          <span className="text-gm-muted font-mono">{post.date}</span>
+        <div className="flex flex-wrap items-center justify-between gap-3 text-xs mb-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className={`font-semibold ${post.categoryColor || 'text-gm-orange'}`}>{post.category}</span>
+            <span className="text-gm-muted">&bull;</span>
+            <span className="text-gm-muted font-mono">{post.readTime}</span>
+            <span className="text-gm-muted">&bull;</span>
+            <span className="text-gm-muted font-mono">{post.date}</span>
+          </div>
+          <button type="button" onClick={() => toggleFavorite(post.slug)} className={`inline-flex items-center gap-1.5 rounded border px-2.5 py-1 text-xs font-medium transition-colors ${isFavorite(post.slug) ? 'border-yellow-400/50 bg-yellow-400/10 text-yellow-400' : 'border-gm-border bg-gm-code text-gm-muted hover:text-white hover:border-gm-border-light'}`}><span>{isFavorite(post.slug) ? '★' : '☆'}</span><span>{isFavorite(post.slug) ? 'Favorited' : 'Add to Favorites'}</span></button>
         </div>
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight">{post.title}</h1>
         <p className="mt-3 text-sm sm:text-base text-gm-text leading-relaxed">{post.description}</p>
