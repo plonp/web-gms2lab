@@ -1,11 +1,12 @@
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 
 export function useCopy(timeout = 1500) {
-  const [copiedId, setCopiedId] = useState(null)
-  const copy = useCallback((text, id = true) => {
+  const [copied, setCopied] = useState(null)
+  const copy = (text, id = true) => {
     navigator.clipboard.writeText(text)
-    setCopiedId(id)
-    setTimeout(() => setCopiedId(null), timeout)
-  }, [timeout])
-  return [copiedId, copy]
+    setCopied(id)
+    setTimeout(() => setCopied(null), timeout)
+  }
+  return [copied, copy]
 }
+

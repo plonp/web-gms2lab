@@ -10,32 +10,21 @@ export default function App() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  // Press "/" to focus and activate the search bar on the landing page
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      const active = document.activeElement
-      const isEditing = active?.tagName === 'INPUT' || active?.tagName === 'TEXTAREA' || active?.isContentEditable
-      const searchInput = document.getElementById('search-input')
-
-      if (e.key === '/' && !isEditing) {
+    const onKey = (e) => {
+      const el = document.activeElement, input = document.getElementById('search-input')
+      if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(el?.tagName) && !el?.isContentEditable) {
         e.preventDefault()
         if (location.pathname !== '/') navigate('/')
-        setTimeout(() => {
-          const input = document.getElementById('search-input')
-          input?.focus()
-          input?.select()
-        }, 0)
-      } else if (e.key === 'Escape' && active === searchInput) {
-        searchInput?.blur()
-      }
+        setTimeout(() => input?.select(), 0)
+      } else if (e.key === 'Escape' && el === input) input?.blur()
     }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
   }, [location.pathname, navigate])
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-gm-bg text-gm-text flex flex-col">
       <Navbar />
       <main className="flex-1">
         <Routes>
@@ -50,5 +39,6 @@ export default function App() {
     </div>
   )
 }
+
 
 

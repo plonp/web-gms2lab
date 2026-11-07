@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+  --color-gm-bg: #191919;
+  --color-gm-header: #161616;
+  --color-gm-card: #242424;
+  --color-gm-card-hover: #292929;
+  --color-gm-code: #161616;
+  --color-gm-border: #242424;
+  --color-gm-border-light: #444444;
+  --color-gm-green: #04de80;
+  --color-gm-green-dark: #039e5c;
+  --color-gm-orange: #ffb871;
+  --color-gm-text: #cfcfcf;
+  --color-gm-muted: #888888;
+}
