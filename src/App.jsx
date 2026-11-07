@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import ScriptsPage from './pages/ScriptsPage'
+import BlogsPage from './pages/BlogsPage'
+import BlogDetailPage from './pages/BlogDetailPage'
 import DocsPage from './pages/DocsPage'
 import AboutPage from './pages/AboutPage'
 import Footer from './components/Footer'
@@ -30,6 +32,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<ScriptsPage />} />
           <Route path="/scripts" element={<Navigate to="/" replace />} />
+          <Route path="/blogs" element={<BlogsPage />} />
+          <Route path="/blogs/:slug" element={<BlogDetailPage />} />
           <Route path="/docs" element={<DocsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
