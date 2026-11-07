@@ -1,77 +1,54 @@
-import { useState, useMemo, useRef, useEffect } from 'react'
+import { useEffect } from 'react'
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import HeroSearch from './components/HeroSearch'
-import DirectoryGrid from './components/DirectoryGrid'
+import ScriptsPage from './pages/ScriptsPage'
+import DocsPage from './pages/DocsPage'
+import AboutPage from './pages/AboutPage'
 import Footer from './components/Footer'
-import { DIRECTORY_ITEMS } from './data/directoryData'
 
 export default function App() {
-  const [searchQuery, setSearchQuery] = useState('')
-  const searchInputRef = useRef(null)
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  // Press "/" to focus and activate the search bar
+  // Press "/" to focus and activate the search bar on the landing page
   useEffect(() => {
     const handleKeyDown = (e) => {
-      const activeTag = document.activeElement?.tagName
-      const isEditing =
-        activeTag === 'INPUT' ||
-        activeTag === 'TEXTAREA' ||
-        document.activeElement?.isContentEditable
+      const active = document.activeElement
+      const isEditing = active?.tagName === 'INPUT' || active?.tagName === 'TEXTAREA' || active?.isContentEditable
+      const searchInput = document.getElementById('search-input')
 
       if (e.key === '/' && !isEditing) {
         e.preventDefault()
-        searchInputRef.current?.focus()
-        searchInputRef.current?.select()
-      } else if (e.key === 'Escape' && document.activeElement === searchInputRef.current) {
-        searchInputRef.current?.blur()
+        if (location.pathname !== '/') navigate('/')
+        setTimeout(() => {
+          const input = document.getElementById('search-input')
+          input?.focus()
+          input?.select()
+        }, 0)
+      } else if (e.key === 'Escape' && active === searchInput) {
+        searchInput?.blur()
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [])
-
-  const handleHomeClick = () => {
-    setSearchQuery('')
-    window.scrollTo({ top: 0 })
-    searchInputRef.current?.focus()
-  }
-
-  const filteredItems = useMemo(() => {
-    const q = searchQuery.trim().toLowerCase()
-    if (!q) return DIRECTORY_ITEMS
-
-    return DIRECTORY_ITEMS.filter((item) => {
-      return (
-        item.title.toLowerCase().includes(q) ||
-        item.description.toLowerCase().includes(q) ||
-        item.tags.some((t) => t.toLowerCase().includes(q)) ||
-        item.categoryLabel.toLowerCase().includes(q)
-      )
-    })
-  }, [searchQuery])
+  }, [location.pathname, navigate])
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
-      <Navbar onHomeClick={handleHomeClick} />
-
+      <Navbar />
       <main className="flex-1">
-        <HeroSearch
-          inputRef={searchInputRef}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          resultsCount={filteredItems.length}
-          totalCount={DIRECTORY_ITEMS.length}
-        />
-
-        <DirectoryGrid
-          items={filteredItems}
-          searchQuery={searchQuery}
-          onClearSearch={() => setSearchQuery('')}
-        />
+        <Routes>
+          <Route path="/" element={<ScriptsPage />} />
+          <Route path="/scripts" element={<Navigate to="/" replace />} />
+          <Route path="/docs" element={<DocsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
-
       <Footer />
     </div>
   )
 }
+
+

@@ -1,13 +1,3 @@
-export const CATEGORIES = [
-  { id: 'all', label: 'All Resources' },
-  { id: 'architecture', label: 'Architecture & State' },
-  { id: 'camera', label: 'Camera & Display' },
-  { id: 'math-physics', label: 'Math & Physics' },
-  { id: 'shaders', label: 'Shaders & Effects' },
-  { id: 'input', label: 'Input & Control' },
-  { id: 'data', label: 'Data & Storage' },
-]
-
 export const DIRECTORY_ITEMS = [
   {
     id: 'state-machine-finite',
