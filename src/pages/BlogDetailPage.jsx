@@ -1,11 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { useCopy } from '../hooks/useCopy'
 import { useFavorites } from '../hooks/useFavorites'
-
-const BLOG_POSTS = Object.entries(import.meta.glob('../blogs/*.js', { eager: true })).map(([path, mod]) => {
-  const data = mod.default || mod, id = path.split('/').pop().replace(/\.[^/.]+$/, '')
-  return { ...data, slug: data.slug || id.replace(/_/g, '-') }
-})
+import { BLOG_POSTS } from '../data/blogs'
 
 export default function BlogDetailPage() {
   const { slug } = useParams()
