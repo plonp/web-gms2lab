@@ -1,5 +1,6 @@
 export default {
   slug: 'projectile-function-script',
+  highlight: true,
   title: 'Projectile Function Script: Target (x, y) Ballistic Trajectories',
   description: 'Calculate the exact launch velocity (vx, vy) in GameMaker to land a projectile on any target coordinate (x, y) using flight time, apex arc height, or fixed launch speed.',
   category: 'Physics & Math',

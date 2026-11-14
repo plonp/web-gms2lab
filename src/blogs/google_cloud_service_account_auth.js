@@ -1,5 +1,6 @@
 export default {
   slug: 'google-cloud-service-account-auth',
+  highlight: true,
   title: 'Implementing Google Cloud Service Account to Avoid 6-Month Inactivity Refresh Token Expiry',
   description: 'Tired of OAuth2 refresh tokens silently expiring after 6 months of inactivity or 7 days in test mode? Learn how to implement Google Cloud Service Accounts for permanent, uninterrupted background authentication in GameMaker.',
   category: 'Networking & Integrations',

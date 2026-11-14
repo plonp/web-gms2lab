@@ -1,5 +1,6 @@
 export default {
   slug: 'ui-transition-state-machine-easing',
+  highlight: true,
   title: 'Proper UI Transitions in GameMaker: State Machines, Easing & Input Gating',
   description: 'Avoid glitchy menus, sub-pixel text blur, and double-click softlocks. Build robust, frame-deterministic UI transitions in GML using lifecycle states, normalized easing curves, and input gating.',
   category: 'Architecture',
