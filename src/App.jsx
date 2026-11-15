@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import ScriptsPage from './pages/ScriptsPage'
 import BlogsPage from './pages/BlogsPage'
 import BlogDetailPage from './pages/BlogDetailPage'
+import GuidesPage from './pages/GuidesPage'
 import DocsPage from './pages/DocsPage'
 import AboutPage from './pages/AboutPage'
 import Footer from './components/Footer'
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/" element={<BlogsPage />} />
           <Route path="/blogs" element={<Navigate to="/" replace />} />
           <Route path="/blogs/:slug" element={<BlogDetailPage />} />
+          <Route path="/guides" element={<GuidesPage />} />
           <Route path="/scripts" element={<ScriptsPage />} />
           <Route path="/docs" element={<DocsPage />} />
           <Route path="/about" element={<AboutPage />} />

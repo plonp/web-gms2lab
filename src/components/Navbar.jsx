@@ -1,6 +1,6 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
-const NAV_ITEMS = [{ to: '/', label: 'Blogs' }, { to: '/scripts', label: 'Scripts' }, { to: '/docs', label: 'Docs' }, { to: '/about', label: 'About' }]
+const NAV_ITEMS = [{ to: '/', label: 'Blogs' }, { to: '/guides', label: 'Guides' }, { to: '/scripts', label: 'Scripts' }, { to: '/docs', label: 'Docs' }, { to: '/about', label: 'About' }]
 
 export default function Navbar() {
   const { pathname } = useLocation()
