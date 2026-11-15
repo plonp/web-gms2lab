@@ -17,7 +17,7 @@ export default function App() {
       const el = document.activeElement, input = document.getElementById('search-input')
       if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(el?.tagName) && !el?.isContentEditable) {
         e.preventDefault()
-        if (location.pathname !== '/' && location.pathname !== '/blogs') navigate('/')
+        if (location.pathname !== '/' && location.pathname !== '/scripts') navigate('/')
         setTimeout(() => input?.select(), 0)
       } else if (e.key === 'Escape' && el === input) input?.blur()
     }
@@ -30,10 +30,10 @@ export default function App() {
       <Navbar />
       <main className="flex-1">
         <Routes>
-          <Route path="/" element={<ScriptsPage />} />
-          <Route path="/scripts" element={<Navigate to="/" replace />} />
-          <Route path="/blogs" element={<BlogsPage />} />
+          <Route path="/" element={<BlogsPage />} />
+          <Route path="/blogs" element={<Navigate to="/" replace />} />
           <Route path="/blogs/:slug" element={<BlogDetailPage />} />
+          <Route path="/scripts" element={<ScriptsPage />} />
           <Route path="/docs" element={<DocsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
