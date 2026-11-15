@@ -9,17 +9,47 @@ const GUIDES = [
     code: 'function PlayerInventory() constructor {\n    items = [];\n    static add_item = function(_id, _count = 1) {\n        array_push(items, { id: _id, count: _count });\n    };\n}',
   },
   {
-    title: '2. Draw Event vs. Draw GUI Event',
-    desc: 'Understanding the distinction between room coordinates and screen GUI coordinates is critical for clean UI rendering.',
-    list: [
-      { label: 'Draw Event', text: 'Renders within world space, transformed by the active viewport and camera angle/zoom.' },
-      { label: 'Draw GUI Event', text: 'Renders in display screen space independent of camera movement. Use for HUD, text overlays, and healthbars.' },
-    ],
-  },
-  {
-    title: '3. Delta Time & Frame Independence',
+    title: '2. Delta Time & Frame Independence',
     desc: 'To ensure game physics run consistently across monitors with 60Hz, 144Hz, or variable refresh rates, scale per-step movements by the fraction of a second elapsed.',
     code: '// In Step Event:\nvar _dt = delta_time / 1000000;\nx += (move_speed * 60) * _dt;',
+  },
+  {
+    title: '3. Major UI Screen Types & HUD Elements',
+    desc: 'Architectural classifications for game interfaces, covering full-screen menu flows and persistent in-game heads-up displays.',
+    subsections: [
+      {
+        subtitle: 'Major UI Screen Types (Menus & Flow)',
+        desc: 'Standard architectural classification of game interface screens, menus, and flow states for navigation state machines.',
+        list: [
+          { label: 'Start Screen / Title Screen', text: 'The initial entry point featuring the game logo, start/resume options, and options access.' },
+          { label: 'Lobby / Home / Directory', text: 'The central hub where players select game modes, view profiles, or queue for matches.' },
+          { label: 'Character Select / Customization Screen', text: 'Where players choose or edit their hero, avatar, skin, decals, or loadouts.' },
+          { label: 'Level Select / Stage Select', text: 'The map or menu used to pick missions, campaigns, or chapters.' },
+          { label: 'Information Hub / Area Map', text: 'World maps, quest logs, active missions, and objectives.' },
+          { label: 'Inventory & Equipment Screen', text: 'Where players inspect, equip, drop, or trade items and gear.' },
+          { label: 'Skill Tree / Upgrading Screen', text: 'Menus for spending experience points or upgrading stats and abilities.' },
+          { label: 'Store / Shop Screen', text: 'Microtransactions, in-game currency purchases, or vendor-buying menus.' },
+          { label: 'Settings / Options Screen', text: 'Audio, video, controls, keybindings, and accessibility configurations.' },
+          { label: 'Pause / Game Menu', text: 'Quick-access menu during active play to resume, adjust settings, or quit.' },
+          { label: 'Scoreboard / Match Stats Screen', text: 'Live or post-match performance tracking and leaderboards.' },
+          { label: 'Game Over / Victory / Results Screen', text: 'End-of-round summaries showing rewards, XP earned, and stats.' },
+        ],
+      },
+      {
+        subtitle: 'In-Game HUD (Heads-Up Display) Elements',
+        desc: 'The HUD stays active during live gameplay around the screen edges:',
+        list: [
+          { label: 'Health / Vital Status Indicator', text: 'Bars or numbers showing player or unit life.' },
+          { label: 'Mana / Energy / Stamina Meter', text: 'Secondary resource bars for skills or running.' },
+          { label: 'Ammo Display & Weapon Wheel', text: 'Bullet counts, active guns, or quick-select gear wheels.' },
+          { label: 'Mini-map / Compass', text: 'Directional orientation and radar showing nearby threats or goals.' },
+          { label: 'Objective Markers & Quest Tray', text: 'Floating or edge-locked icons guiding the player to the next goal.' },
+          { label: 'Reticle / Crosshair', text: 'Center-screen aiming aid.' },
+          { label: 'Button Prompts', text: 'Contextual hints showing which button to press to open a door, loot, or interact.' },
+          { label: 'Kill Feed / Subtitles', text: 'On-screen text logging recent eliminations or character dialogue.' },
+        ],
+      },
+    ],
   },
 ]
 
@@ -46,6 +76,21 @@ export default function DocsPage() {
               <ul className="mt-2 text-xs sm:text-sm text-gm-text list-disc list-inside space-y-1">
                 {g.list.map((li) => <li key={li.label}><strong className="text-white">{li.label}:</strong> {li.text}</li>)}
               </ul>
+            )}
+            {g.subsections && (
+              <div className="mt-5 space-y-6">
+                {g.subsections.map((sub) => (
+                  <div key={sub.subtitle} className="border-t border-gm-border pt-4">
+                    <h3 className="text-base font-semibold text-white">{sub.subtitle}</h3>
+                    {sub.desc && <p className="mt-1 text-xs sm:text-sm text-gm-text leading-relaxed">{sub.desc}</p>}
+                    {sub.list && (
+                      <ul className="mt-2 text-xs sm:text-sm text-gm-text list-disc list-inside space-y-1">
+                        {sub.list.map((li) => <li key={li.label}><strong className="text-white">{li.label}:</strong> {li.text}</li>)}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
             )}
           </section>
         ))}
