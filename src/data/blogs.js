@@ -2,6 +2,7 @@ export const HIGHLIGHTED_SLUGS = [
   'google-cloud-service-account-auth',
   'projectile-function-script',
   'ui-transition-state-machine-easing',
+  'resident-evil-grid-inventory-spanning',
 ]
 
 export const BLOG_POSTS = Object.entries(import.meta.glob('../blogs/*.js', { eager: true })).map(([path, mod]) => {
