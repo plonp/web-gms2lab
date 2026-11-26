@@ -6,18 +6,8 @@ import GuideCard from '../components/GuideCard'
 
 const GUIDES = [
   {
-    title: '1. Structs & Constructors (GML 2.3+)',
-    desc: 'GameMaker 2.3 introduced lightweight data structures called Structs and Constructor functions. Unlike classic DS Maps, structs are garbage-collected automatically and support static member functions.',
-    code: 'function PlayerInventory() constructor {\n    items = [];\n    static add_item = function(_id, _count = 1) {\n        array_push(items, { id: _id, count: _count });\n    };\n}',
-  },
-  {
-    title: '2. Delta Time & Frame Independence',
-    desc: 'To ensure game physics run consistently across monitors with 60Hz, 144Hz, or variable refresh rates, scale per-step movements by the fraction of a second elapsed.',
-    code: '// In Step Event:\nvar _dt = delta_time / 1000000;\nx += (move_speed * 60) * _dt;',
-  },
-  {
     ...UI_SCREEN_AND_HUD_GUIDE,
-    title: '3. Major UI Screen Types & HUD Elements',
+    title: '1. Major UI Screen Types & HUD Elements',
   },
 ]
 
