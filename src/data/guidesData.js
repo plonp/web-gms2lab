@@ -18,6 +18,8 @@ export const UI_SCREEN_AND_HUD_GUIDE = {
         { label: 'Pause / Game Menu', text: 'Quick-access menu during active play to resume, adjust settings, or quit.' },
         { label: 'Scoreboard / Match Stats Screen', text: 'Live or post-match performance tracking and leaderboards.' },
         { label: 'Game Over / Victory / Results Screen', text: 'End-of-round summaries showing rewards, XP earned, and stats.' },
+        { label: 'Gameplay View / Viewport', text: 'The actual 3D or 2D camera view rendering the game world, character, and action.' },
+        { label: 'HUD (Heads-Up Display)', text: 'The UI elements layered directly over the gameplay view—such as health bars, minimaps, crosshairs, ammo counters, and scoreboards—that give real-time feedback without interrupting play.' },
       ],
     },
     {
